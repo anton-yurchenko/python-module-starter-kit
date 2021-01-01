@@ -1,6 +1,6 @@
 I := "⚪"
 E := "🔴"
-PKG_NAME := $(notdir $(CURDIR))
+PKG_NAME := $(notdir $(CURDIR)) | sed 's/-/_/g'
 
 PIPENV := /usr/local/bin/pipenv
 $(PIPENV):
@@ -16,7 +16,7 @@ init:
 	@echo "$(I) creating environment"
 	@pipenv install || (echo "$(E) error creating package"; exit 1)
 
-.PHONE: active
+.PHONY: active
 active:
 	@echo "$(I) activating virtual environment"
 	@pipenv shell --fancy || (echo "$(E) error creating virtual environment"; exit 1)
